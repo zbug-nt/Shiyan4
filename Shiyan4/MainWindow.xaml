@@ -5,8 +5,100 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shiyan4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="800" Closed="Window_Closed">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
+    </Window.Background>
+    <Viewbox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Vertical" Margin="10,10,10,10" VerticalAlignment="Center">
+                <ComboBox x:Name="cbPortName" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="CbPortName_DropDownOpened"/>
+                <ComboBox x:Name="cbBaudRate" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                    <Button x:Name="btnConnect" Content="连接" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="50" Click="BtnConnect_Click"/>
+                    <Button x:Name="btnClose" Content="断开" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="50" Click="BtnClose_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,40,0,0">
+                    <Label Content="白灯"/>
+                    <Slider x:Name="slider1" Width="80" Minimum="0" Maximum="255" ValueChanged="Slider_ValueChanged"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Content="蓝灯"/>
+                    <Slider x:Name="slider2" Width="80" Minimum="0" Maximum="255" ValueChanged="Slider_ValueChanged"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Content="黄灯"/>
+                    <Slider x:Name="slider3" Width="80" Minimum="0" Maximum="255" ValueChanged="Slider_ValueChanged"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Content="绿灯"/>
+                    <Slider x:Name="slider4" Width="80" Minimum="0" Maximum="255" ValueChanged="Slider_ValueChanged"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Content="红灯"/>
+                    <Slider x:Name="slider5" Width="80" Minimum="0" Maximum="255" ValueChanged="Slider_ValueChanged"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Canvas x:Name="cvsBack" Height="12" Width="12">
+                        <Canvas.Background>
+                            <SolidColorBrush Color="#FF7F7F7F"/>
+                        </Canvas.Background>
+                        <Canvas x:Name="cvsColor" Height="10" Width="10" Margin="1,1,1,1"/>
+                    </Canvas>
+                    <Label Content="亮度示意"/>
+                    <Button x:Name="btnSend" Content="发送" Width="45" Click="BtnSend_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,40,0,0" HorizontalAlignment="Center">
+                    <Button x:Name="btnLogStart" Content="Log开始" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Click="BtnLogStart_Click"/>
+                    <Button x:Name="btnLogEnd" Content="Log结束" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="55" Click="BtnLogEnd_Click"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10,10,10,10" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="收到的数据"/>
+                        <ListView x:Name="lvReceive" Height="150" Width="200">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="序号" Width="50" DisplayMemberBinding="{Binding Index}"/>
+                                    <GridViewColumn Header="数据" Width="100" DisplayMemberBinding="{Binding Data}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                        <Label Content="发出的数据"/>
+                        <ListView x:Name="lvSend" Height="150" Width="200" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="序号" Width="50" DisplayMemberBinding="{Binding Index}"/>
+                                    <GridViewColumn Header="数据" Width="100" DisplayMemberBinding="{Binding Data}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="亮度"/>
+                            <TextBox x:Name="txtBrightness" Height="23" TextWrapping="Wrap" Width="80" IsReadOnly="True"/>
+                        </StackPanel>
+                        <Canvas x:Name="cvsBrightness" Height="150" Width="200" Margin="0,10,0,0" Background="#7FFFFF00">
+                            <Polyline x:Name="plBrightness" Stroke="Blue"/>
+                        </Canvas>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="温度"/>
+                            <TextBox x:Name="txtTemperature" Height="23" TextWrapping="Wrap" Width="80"/>
+                        </StackPanel>
+                        <Canvas x:Name="cvsTemperature" Height="150" Width="200" Margin="0,10,0,0" Background="#7F00FF00">
+                            <Polyline x:Name="plTemperature" Stroke="Blue"/>
+                        </Canvas>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Viewbox>
 </Window>
